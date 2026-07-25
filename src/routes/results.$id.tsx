@@ -6,12 +6,14 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 import {
-  ArrowLeft, Copy, Download, Loader2, Mail, ListChecks, Sparkles, ShieldAlert, Lightbulb, Info, Wand2,
+  ArrowLeft, Copy, Download, Loader2, Mail, ListChecks, Sparkles, ShieldAlert, Lightbulb, Info, Wand2, FileText,
 } from "lucide-react";
 import { getRecord, updateRecord } from "@/lib/history";
 import type { HistoryRecord, AnalysisResult } from "@/types/project";
 import { useServerFn } from "@tanstack/react-start";
 import { analyzeProject } from "@/lib/analyze.functions";
+import { downloadPdfReport } from "@/lib/pdf-report";
+import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Cell, Tooltip } from "recharts";
 
 export const Route = createFileRoute("/results/$id")({
   head: () => ({
