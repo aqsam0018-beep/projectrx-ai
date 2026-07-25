@@ -18,6 +18,7 @@ import {
 import { AppNav } from "@/components/layout/AppNav";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
+import { DemoButton } from "@/components/DemoButton";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -97,14 +98,12 @@ function Landing() {
               Transform messy project updates into intelligent recovery strategies using Explainable AI.
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-              <Button asChild size="lg" className="gradient-primary glow-primary text-white border-0">
+              <Button asChild size="lg" className="gradient-primary glow-primary text-white border-0 transition-transform hover:-translate-y-0.5">
                 <Link to="/analyze">
                   Start Diagnosis <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
-              <Button asChild size="lg" variant="outline">
-                <a href="#how">View Demo</a>
-              </Button>
+              <DemoButton />
             </div>
           </div>
 

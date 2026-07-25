@@ -15,10 +15,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
-import { Loader2, Sparkles, Brain, Wand2, ClipboardPaste } from "lucide-react";
+import { Loader2, Sparkles, Brain, Wand2, ClipboardPaste, FileText } from "lucide-react";
 import { useServerFn } from "@tanstack/react-start";
 import { analyzeProject } from "@/lib/analyze.functions";
 import { saveRecord } from "@/lib/history";
+import { SAMPLE_PROJECT } from "@/lib/sample-project";
 import type { ProjectInput, ProjectType, Priority } from "@/types/project";
 
 export const Route = createFileRoute("/analyze")({
@@ -108,16 +109,41 @@ function AnalyzePage() {
     }
   }
 
+  function loadSample() {
+    setProjectName(SAMPLE_PROJECT.projectName);
+    setProjectType(SAMPLE_PROJECT.projectType);
+    setProjectDump(SAMPLE_PROJECT.projectDump);
+    const i = SAMPLE_PROJECT.indicators;
+    setProgress(i.progress);
+    setBudget(i.budgetUtilization);
+    setTimeline(i.timelineCompletion);
+    setStress(i.teamStress);
+    setSatisfaction(i.stakeholderSatisfaction);
+    setOpenRisks(i.openRisks);
+    setPriority(i.priority);
+    toast.success("Sample project loaded");
+  }
+
   return (
     <div className="min-h-screen bg-background">
       <AppNav />
 
       <main className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold sm:text-4xl">New Project Diagnosis</h1>
-          <p className="mt-2 text-muted-foreground">
-            Give ProjectRx AI as much context as you can. Everything runs on your device and via a secure server call.
-          </p>
+        <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h1 className="text-3xl font-bold sm:text-4xl">New Project Diagnosis</h1>
+            <p className="mt-2 text-muted-foreground">
+              Give ProjectRx AI as much context as you can. Everything runs on your device and via a secure server call.
+            </p>
+          </div>
+          <Button
+            variant="outline"
+            onClick={loadSample}
+            disabled={loading}
+            className="transition-all hover:-translate-y-0.5 hover:border-primary/50 hover:bg-primary/10"
+          >
+            <FileText className="mr-2 h-4 w-4" /> Load Sample Project
+          </Button>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-3">
@@ -221,7 +247,7 @@ function AnalyzePage() {
                 <Button
                   onClick={onSubmit}
                   disabled={loading}
-                  className="mt-5 h-12 w-full gradient-primary glow-primary text-base text-white border-0"
+                  className="mt-5 h-12 w-full gradient-primary glow-primary text-base text-white border-0 transition-transform hover:-translate-y-0.5"
                 >
                   {loading ? (
                     <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Analyzing…</>
@@ -230,11 +256,18 @@ function AnalyzePage() {
                   )}
                 </Button>
                 {loading && (
-                  <div className="mt-4 space-y-2">
-                    <div className="h-1.5 w-full overflow-hidden rounded-full bg-muted">
-                      <div className="h-full w-1/3 animate-pulse gradient-primary" />
+                  <div className="mt-4 space-y-3">
+                    <div className="relative h-1.5 w-full overflow-hidden rounded-full bg-muted">
+                      <div
+                        className="absolute inset-y-0 left-0 gradient-primary transition-[width] duration-1000 ease-out"
+                        style={{ width: `${((msgIdx + 1) / LOADING_MESSAGES.length) * 100}%` }}
+                      />
+                      <div className="absolute inset-0 -translate-x-full animate-[shimmer_1.6s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
                     </div>
-                    <p className="text-xs text-muted-foreground">{LOADING_MESSAGES[msgIdx]}</p>
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                      <Loader2 className="h-3 w-3 animate-spin text-primary" />
+                      <span key={msgIdx} className="animate-fade-in">{LOADING_MESSAGES[msgIdx]}</span>
+                    </div>
                   </div>
                 )}
                 <p className="mt-4 text-[11px] text-muted-foreground">

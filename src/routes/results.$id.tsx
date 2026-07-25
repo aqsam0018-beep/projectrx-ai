@@ -6,12 +6,14 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 import {
-  ArrowLeft, Copy, Download, Loader2, Mail, ListChecks, Sparkles, ShieldAlert, Lightbulb, Info, Wand2,
+  ArrowLeft, Copy, Download, Loader2, Mail, ListChecks, Sparkles, ShieldAlert, Lightbulb, Info, Wand2, FileText,
 } from "lucide-react";
 import { getRecord, updateRecord } from "@/lib/history";
 import type { HistoryRecord, AnalysisResult } from "@/types/project";
 import { useServerFn } from "@tanstack/react-start";
 import { analyzeProject } from "@/lib/analyze.functions";
+import { downloadPdfReport } from "@/lib/pdf-report";
+import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Cell, Tooltip } from "recharts";
 
 export const Route = createFileRoute("/results/$id")({
   head: () => ({
@@ -98,7 +100,17 @@ function ResultsPage() {
     toast.success(`${label} copied`);
   }
 
-  function downloadReport() {
+  function downloadPdf() {
+    try {
+      downloadPdfReport(record!);
+      toast.success("PDF report downloaded");
+    } catch (e) {
+      console.error(e);
+      toast.error("Could not generate PDF");
+    }
+  }
+
+  function downloadMarkdown() {
     const md = buildReportMarkdown(record!);
     const blob = new Blob([md], { type: "text/markdown" });
     const url = URL.createObjectURL(blob);
@@ -128,11 +140,38 @@ function ResultsPage() {
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
-            <Button variant="outline" onClick={() => copy(result.executiveSummary, "Executive summary")}>
-              <Copy className="mr-2 h-4 w-4" /> Copy Summary
+            <Button
+              variant="outline"
+              onClick={() => copy(result.executiveSummary, "Executive summary")}
+              className="transition-all hover:-translate-y-0.5 hover:border-primary/50 hover:bg-primary/10"
+            >
+              <Copy className="mr-2 h-4 w-4" /> Copy Executive Summary
             </Button>
-            <Button className="gradient-primary text-white border-0" onClick={downloadReport}>
-              <Download className="mr-2 h-4 w-4" /> Download Report
+            <Button
+              variant="outline"
+              onClick={() =>
+                copy(
+                  `Subject: ${result.stakeholderEmail.subject}\n\n${result.stakeholderEmail.body}`,
+                  "Stakeholder email",
+                )
+              }
+              className="transition-all hover:-translate-y-0.5 hover:border-primary/50 hover:bg-primary/10"
+            >
+              <Mail className="mr-2 h-4 w-4" /> Copy Stakeholder Email
+            </Button>
+            <Button
+              variant="ghost"
+              onClick={downloadMarkdown}
+              className="transition-all hover:-translate-y-0.5"
+              title="Download Markdown"
+            >
+              <FileText className="mr-2 h-4 w-4" /> .md
+            </Button>
+            <Button
+              className="gradient-primary glow-primary text-white border-0 transition-all hover:-translate-y-0.5"
+              onClick={downloadPdf}
+            >
+              <Download className="mr-2 h-4 w-4" /> Download PDF Report
             </Button>
           </div>
         </div>
@@ -140,12 +179,14 @@ function ResultsPage() {
         {/* Top grid */}
         <div className="mt-8 grid gap-5 lg:grid-cols-3">
           {/* Recovery Index gauge */}
-          <div className="glass rounded-2xl p-6">
+          <div className="glass rounded-2xl p-6 transition-all hover:border-primary/40 hover:-translate-y-0.5">
             <div className="text-xs uppercase tracking-wider text-muted-foreground">Project Recovery Index</div>
             <div className="mt-4 flex items-center gap-6">
               <Gauge value={result.projectRecoveryIndex} />
               <div>
-                <div className={`text-5xl font-bold ${indexColor}`}>{result.projectRecoveryIndex}</div>
+                <div className={`text-5xl font-bold ${indexColor} tabular-nums`}>
+                  <AnimatedNumber value={result.projectRecoveryIndex} />
+                </div>
                 <div className="mt-1 text-sm font-medium">{result.status}</div>
                 {prevIndex != null && (
                   <div className={`mt-2 text-xs ${diff >= 0 ? "text-success" : "text-destructive"}`}>
@@ -157,9 +198,17 @@ function ResultsPage() {
           </div>
 
           {/* Confidence */}
-          <div className="glass rounded-2xl p-6">
+          <div className="glass rounded-2xl p-6 transition-all hover:border-primary/40 hover:-translate-y-0.5">
             <div className="text-xs uppercase tracking-wider text-muted-foreground">Confidence Score</div>
-            <div className="mt-4 text-5xl font-bold gradient-text">{result.confidence}%</div>
+            <div className="mt-4 text-5xl font-bold gradient-text tabular-nums">
+              <AnimatedNumber value={result.confidence} suffix="%" />
+            </div>
+            <div className="mt-4 h-2 w-full overflow-hidden rounded-full bg-muted">
+              <div
+                className="h-full gradient-primary transition-[width] duration-1000 ease-out"
+                style={{ width: `${Math.max(0, Math.min(100, result.confidence))}%` }}
+              />
+            </div>
             <p className="mt-3 text-sm text-muted-foreground">
               {result.confidence >= 60 ? "Sufficient project information available." : "More project data required."}
             </p>
@@ -171,7 +220,7 @@ function ResultsPage() {
           </div>
 
           {/* Risk categories */}
-          <div className="glass rounded-2xl p-6">
+          <div className="glass rounded-2xl p-6 transition-all hover:border-primary/40 hover:-translate-y-0.5">
             <div className="text-xs uppercase tracking-wider text-muted-foreground">Risk Categories</div>
             <div className="mt-3 flex items-center gap-2">
               <ShieldAlert className={`h-5 w-5 ${indexColor}`} />
@@ -182,11 +231,28 @@ function ResultsPage() {
                 <span className="text-sm text-muted-foreground">No categories flagged.</span>
               )}
               {result.riskCategories.map((c) => (
-                <span key={c} className="rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs text-primary">
+                <span
+                  key={c}
+                  className="rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs text-primary transition-colors hover:bg-primary/20"
+                >
                   {c}
                 </span>
               ))}
             </div>
+          </div>
+        </div>
+
+        {/* Project metrics chart */}
+        <div className="mt-6 glass rounded-2xl p-6 transition-all hover:border-primary/40">
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="text-xs uppercase tracking-wider text-muted-foreground">Project Metrics</div>
+              <h3 className="mt-1 text-lg font-semibold">Indicator snapshot</h3>
+            </div>
+            <span className="text-xs text-muted-foreground">0–100 scale · Open Risks × 10</span>
+          </div>
+          <div className="mt-4">
+            <IndicatorsChart record={record} />
           </div>
         </div>
 
@@ -382,21 +448,101 @@ function ResultsPage() {
 }
 
 function Gauge({ value }: { value: number }) {
-  const clamped = Math.max(0, Math.min(100, value));
+  const target = Math.max(0, Math.min(100, value));
+  const [display, setDisplay] = useState(0);
+  useEffect(() => {
+    setDisplay(0);
+    const start = performance.now();
+    const dur = 900;
+    let raf = 0;
+    const tick = (t: number) => {
+      const p = Math.min(1, (t - start) / dur);
+      const eased = 1 - Math.pow(1 - p, 3);
+      setDisplay(target * eased);
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [target]);
+
   const R = 46, C = 2 * Math.PI * R;
-  const offset = C - (clamped / 100) * C;
-  const stroke = clamped >= 70 ? "oklch(0.72 0.19 145)" : clamped >= 45 ? "oklch(0.78 0.17 70)" : "oklch(0.62 0.22 25)";
+  const offset = C - (display / 100) * C;
+  const stroke = target >= 70 ? "oklch(0.72 0.19 145)" : target >= 45 ? "oklch(0.78 0.17 70)" : "oklch(0.62 0.22 25)";
   return (
-    <svg width="120" height="120" viewBox="0 0 120 120">
-      <circle cx="60" cy="60" r={R} stroke="oklch(0.28 0.02 275)" strokeWidth="10" fill="none" />
+    <svg width="120" height="120" viewBox="0 0 120 120" className="drop-shadow-[0_0_18px_rgba(139,92,246,0.25)]">
+      <defs>
+        <linearGradient id="gaugeTrack" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="oklch(0.28 0.02 275)" />
+          <stop offset="100%" stopColor="oklch(0.22 0.02 275)" />
+        </linearGradient>
+      </defs>
+      <circle cx="60" cy="60" r={R} stroke="url(#gaugeTrack)" strokeWidth="10" fill="none" />
       <circle
         cx="60" cy="60" r={R}
         stroke={stroke} strokeWidth="10" fill="none"
         strokeDasharray={C} strokeDashoffset={offset}
         strokeLinecap="round" transform="rotate(-90 60 60)"
-        style={{ transition: "stroke-dashoffset 700ms ease" }}
       />
+      <text x="60" y="66" textAnchor="middle" fontSize="22" fontWeight="700" fill={stroke}>
+        {Math.round(display)}
+      </text>
     </svg>
+  );
+}
+
+function AnimatedNumber({ value, suffix = "" }: { value: number; suffix?: string }) {
+  const [display, setDisplay] = useState(0);
+  useEffect(() => {
+    setDisplay(0);
+    const start = performance.now();
+    const dur = 900;
+    let raf = 0;
+    const tick = (t: number) => {
+      const p = Math.min(1, (t - start) / dur);
+      const eased = 1 - Math.pow(1 - p, 3);
+      setDisplay(value * eased);
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [value]);
+  return <>{Math.round(display)}{suffix}</>;
+}
+
+function IndicatorsChart({ record }: { record: HistoryRecord }) {
+  const i = record.input.indicators;
+  const data = [
+    { name: "Progress", value: i.progress, tone: "oklch(0.72 0.19 145)" },
+    { name: "Timeline", value: i.timelineCompletion, tone: "oklch(0.68 0.18 260)" },
+    { name: "Budget", value: i.budgetUtilization, tone: "oklch(0.78 0.17 70)" },
+    { name: "Stress", value: i.teamStress, tone: "oklch(0.62 0.22 25)" },
+    { name: "Satisfaction", value: i.stakeholderSatisfaction, tone: "oklch(0.72 0.19 145)" },
+    { name: "Open Risks", value: Math.min(100, i.openRisks * 10), tone: "oklch(0.62 0.22 25)" },
+  ];
+  return (
+    <div className="h-48 w-full">
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart data={data} margin={{ top: 8, right: 8, left: -20, bottom: 0 }}>
+          <XAxis dataKey="name" tick={{ fontSize: 10, fill: "oklch(0.7 0.02 275)" }} tickLine={false} axisLine={false} interval={0} />
+          <YAxis domain={[0, 100]} tick={{ fontSize: 10, fill: "oklch(0.7 0.02 275)" }} tickLine={false} axisLine={false} />
+          <Tooltip
+            cursor={{ fill: "oklch(0.28 0.02 275 / 0.4)" }}
+            contentStyle={{
+              background: "oklch(0.19 0.012 275)",
+              border: "1px solid oklch(0.28 0.02 275)",
+              borderRadius: 8,
+              fontSize: 12,
+            }}
+            labelStyle={{ color: "oklch(0.985 0 0)" }}
+          />
+          <Bar dataKey="value" radius={[6, 6, 0, 0]} isAnimationActive animationDuration={900}>
+            {data.map((d, idx) => (
+              <Cell key={idx} fill={d.tone} />
+            ))}
+          </Bar>
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
   );
 }
 
