@@ -220,7 +220,7 @@ function ResultsPage() {
           </div>
 
           {/* Risk categories */}
-          <div className="glass rounded-2xl p-6">
+          <div className="glass rounded-2xl p-6 transition-all hover:border-primary/40 hover:-translate-y-0.5">
             <div className="text-xs uppercase tracking-wider text-muted-foreground">Risk Categories</div>
             <div className="mt-3 flex items-center gap-2">
               <ShieldAlert className={`h-5 w-5 ${indexColor}`} />
@@ -231,11 +231,28 @@ function ResultsPage() {
                 <span className="text-sm text-muted-foreground">No categories flagged.</span>
               )}
               {result.riskCategories.map((c) => (
-                <span key={c} className="rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs text-primary">
+                <span
+                  key={c}
+                  className="rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs text-primary transition-colors hover:bg-primary/20"
+                >
                   {c}
                 </span>
               ))}
             </div>
+          </div>
+        </div>
+
+        {/* Project metrics chart */}
+        <div className="mt-6 glass rounded-2xl p-6 transition-all hover:border-primary/40">
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="text-xs uppercase tracking-wider text-muted-foreground">Project Metrics</div>
+              <h3 className="mt-1 text-lg font-semibold">Indicator snapshot</h3>
+            </div>
+            <span className="text-xs text-muted-foreground">0–100 scale · Open Risks × 10</span>
+          </div>
+          <div className="mt-4">
+            <IndicatorsChart record={record} />
           </div>
         </div>
 
