@@ -15,10 +15,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
-import { Loader2, Sparkles, Brain, Wand2, ClipboardPaste } from "lucide-react";
+import { Loader2, Sparkles, Brain, Wand2, ClipboardPaste, FileText } from "lucide-react";
 import { useServerFn } from "@tanstack/react-start";
 import { analyzeProject } from "@/lib/analyze.functions";
 import { saveRecord } from "@/lib/history";
+import { SAMPLE_PROJECT } from "@/lib/sample-project";
 import type { ProjectInput, ProjectType, Priority } from "@/types/project";
 
 export const Route = createFileRoute("/analyze")({
