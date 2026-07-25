@@ -431,21 +431,101 @@ function ResultsPage() {
 }
 
 function Gauge({ value }: { value: number }) {
-  const clamped = Math.max(0, Math.min(100, value));
+  const target = Math.max(0, Math.min(100, value));
+  const [display, setDisplay] = useState(0);
+  useEffect(() => {
+    setDisplay(0);
+    const start = performance.now();
+    const dur = 900;
+    let raf = 0;
+    const tick = (t: number) => {
+      const p = Math.min(1, (t - start) / dur);
+      const eased = 1 - Math.pow(1 - p, 3);
+      setDisplay(target * eased);
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [target]);
+
   const R = 46, C = 2 * Math.PI * R;
-  const offset = C - (clamped / 100) * C;
-  const stroke = clamped >= 70 ? "oklch(0.72 0.19 145)" : clamped >= 45 ? "oklch(0.78 0.17 70)" : "oklch(0.62 0.22 25)";
+  const offset = C - (display / 100) * C;
+  const stroke = target >= 70 ? "oklch(0.72 0.19 145)" : target >= 45 ? "oklch(0.78 0.17 70)" : "oklch(0.62 0.22 25)";
   return (
-    <svg width="120" height="120" viewBox="0 0 120 120">
-      <circle cx="60" cy="60" r={R} stroke="oklch(0.28 0.02 275)" strokeWidth="10" fill="none" />
+    <svg width="120" height="120" viewBox="0 0 120 120" className="drop-shadow-[0_0_18px_rgba(139,92,246,0.25)]">
+      <defs>
+        <linearGradient id="gaugeTrack" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="oklch(0.28 0.02 275)" />
+          <stop offset="100%" stopColor="oklch(0.22 0.02 275)" />
+        </linearGradient>
+      </defs>
+      <circle cx="60" cy="60" r={R} stroke="url(#gaugeTrack)" strokeWidth="10" fill="none" />
       <circle
         cx="60" cy="60" r={R}
         stroke={stroke} strokeWidth="10" fill="none"
         strokeDasharray={C} strokeDashoffset={offset}
         strokeLinecap="round" transform="rotate(-90 60 60)"
-        style={{ transition: "stroke-dashoffset 700ms ease" }}
       />
+      <text x="60" y="66" textAnchor="middle" fontSize="22" fontWeight="700" fill={stroke}>
+        {Math.round(display)}
+      </text>
     </svg>
+  );
+}
+
+function AnimatedNumber({ value, suffix = "" }: { value: number; suffix?: string }) {
+  const [display, setDisplay] = useState(0);
+  useEffect(() => {
+    setDisplay(0);
+    const start = performance.now();
+    const dur = 900;
+    let raf = 0;
+    const tick = (t: number) => {
+      const p = Math.min(1, (t - start) / dur);
+      const eased = 1 - Math.pow(1 - p, 3);
+      setDisplay(value * eased);
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [value]);
+  return <>{Math.round(display)}{suffix}</>;
+}
+
+function IndicatorsChart({ record }: { record: HistoryRecord }) {
+  const i = record.input.indicators;
+  const data = [
+    { name: "Progress", value: i.progress, tone: "oklch(0.72 0.19 145)" },
+    { name: "Timeline", value: i.timelineCompletion, tone: "oklch(0.68 0.18 260)" },
+    { name: "Budget", value: i.budgetUtilization, tone: "oklch(0.78 0.17 70)" },
+    { name: "Stress", value: i.teamStress, tone: "oklch(0.62 0.22 25)" },
+    { name: "Satisfaction", value: i.stakeholderSatisfaction, tone: "oklch(0.72 0.19 145)" },
+    { name: "Open Risks", value: Math.min(100, i.openRisks * 10), tone: "oklch(0.62 0.22 25)" },
+  ];
+  return (
+    <div className="h-48 w-full">
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart data={data} margin={{ top: 8, right: 8, left: -20, bottom: 0 }}>
+          <XAxis dataKey="name" tick={{ fontSize: 10, fill: "oklch(0.7 0.02 275)" }} tickLine={false} axisLine={false} interval={0} />
+          <YAxis domain={[0, 100]} tick={{ fontSize: 10, fill: "oklch(0.7 0.02 275)" }} tickLine={false} axisLine={false} />
+          <Tooltip
+            cursor={{ fill: "oklch(0.28 0.02 275 / 0.4)" }}
+            contentStyle={{
+              background: "oklch(0.19 0.012 275)",
+              border: "1px solid oklch(0.28 0.02 275)",
+              borderRadius: 8,
+              fontSize: 12,
+            }}
+            labelStyle={{ color: "oklch(0.985 0 0)" }}
+          />
+          <Bar dataKey="value" radius={[6, 6, 0, 0]} isAnimationActive animationDuration={900}>
+            {data.map((d, idx) => (
+              <Cell key={idx} fill={d.tone} />
+            ))}
+          </Bar>
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
   );
 }
 
