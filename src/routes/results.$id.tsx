@@ -100,7 +100,17 @@ function ResultsPage() {
     toast.success(`${label} copied`);
   }
 
-  function downloadReport() {
+  function downloadPdf() {
+    try {
+      downloadPdfReport(record!);
+      toast.success("PDF report downloaded");
+    } catch (e) {
+      console.error(e);
+      toast.error("Could not generate PDF");
+    }
+  }
+
+  function downloadMarkdown() {
     const md = buildReportMarkdown(record!);
     const blob = new Blob([md], { type: "text/markdown" });
     const url = URL.createObjectURL(blob);
