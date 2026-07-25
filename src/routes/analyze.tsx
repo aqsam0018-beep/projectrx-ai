@@ -109,6 +109,21 @@ function AnalyzePage() {
     }
   }
 
+  function loadSample() {
+    setProjectName(SAMPLE_PROJECT.projectName);
+    setProjectType(SAMPLE_PROJECT.projectType);
+    setProjectDump(SAMPLE_PROJECT.projectDump);
+    const i = SAMPLE_PROJECT.indicators;
+    setProgress(i.progress);
+    setBudget(i.budgetUtilization);
+    setTimeline(i.timelineCompletion);
+    setStress(i.teamStress);
+    setSatisfaction(i.stakeholderSatisfaction);
+    setOpenRisks(i.openRisks);
+    setPriority(i.priority);
+    toast.success("Sample project loaded");
+  }
+
   return (
     <div className="min-h-screen bg-background">
       <AppNav />
