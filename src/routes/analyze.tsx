@@ -247,7 +247,7 @@ function AnalyzePage() {
                 <Button
                   onClick={onSubmit}
                   disabled={loading}
-                  className="mt-5 h-12 w-full gradient-primary glow-primary text-base text-white border-0"
+                  className="mt-5 h-12 w-full gradient-primary glow-primary text-base text-white border-0 transition-transform hover:-translate-y-0.5"
                 >
                   {loading ? (
                     <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Analyzing…</>
@@ -256,11 +256,18 @@ function AnalyzePage() {
                   )}
                 </Button>
                 {loading && (
-                  <div className="mt-4 space-y-2">
-                    <div className="h-1.5 w-full overflow-hidden rounded-full bg-muted">
-                      <div className="h-full w-1/3 animate-pulse gradient-primary" />
+                  <div className="mt-4 space-y-3">
+                    <div className="relative h-1.5 w-full overflow-hidden rounded-full bg-muted">
+                      <div
+                        className="absolute inset-y-0 left-0 gradient-primary transition-[width] duration-1000 ease-out"
+                        style={{ width: `${((msgIdx + 1) / LOADING_MESSAGES.length) * 100}%` }}
+                      />
+                      <div className="absolute inset-0 -translate-x-full animate-[shimmer_1.6s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
                     </div>
-                    <p className="text-xs text-muted-foreground">{LOADING_MESSAGES[msgIdx]}</p>
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                      <Loader2 className="h-3 w-3 animate-spin text-primary" />
+                      <span key={msgIdx} className="animate-fade-in">{LOADING_MESSAGES[msgIdx]}</span>
+                    </div>
                   </div>
                 )}
                 <p className="mt-4 text-[11px] text-muted-foreground">
