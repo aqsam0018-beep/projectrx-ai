@@ -18,6 +18,7 @@ import {
 import { AppNav } from "@/components/layout/AppNav";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
+import { DemoButton } from "@/components/DemoButton";
 
 export const Route = createFileRoute("/")({
   head: () => ({
