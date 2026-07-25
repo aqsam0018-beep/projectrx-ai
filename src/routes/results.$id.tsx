@@ -140,11 +140,38 @@ function ResultsPage() {
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
-            <Button variant="outline" onClick={() => copy(result.executiveSummary, "Executive summary")}>
-              <Copy className="mr-2 h-4 w-4" /> Copy Summary
+            <Button
+              variant="outline"
+              onClick={() => copy(result.executiveSummary, "Executive summary")}
+              className="transition-all hover:-translate-y-0.5 hover:border-primary/50 hover:bg-primary/10"
+            >
+              <Copy className="mr-2 h-4 w-4" /> Copy Executive Summary
             </Button>
-            <Button className="gradient-primary text-white border-0" onClick={downloadReport}>
-              <Download className="mr-2 h-4 w-4" /> Download Report
+            <Button
+              variant="outline"
+              onClick={() =>
+                copy(
+                  `Subject: ${result.stakeholderEmail.subject}\n\n${result.stakeholderEmail.body}`,
+                  "Stakeholder email",
+                )
+              }
+              className="transition-all hover:-translate-y-0.5 hover:border-primary/50 hover:bg-primary/10"
+            >
+              <Mail className="mr-2 h-4 w-4" /> Copy Stakeholder Email
+            </Button>
+            <Button
+              variant="ghost"
+              onClick={downloadMarkdown}
+              className="transition-all hover:-translate-y-0.5"
+              title="Download Markdown"
+            >
+              <FileText className="mr-2 h-4 w-4" /> .md
+            </Button>
+            <Button
+              className="gradient-primary glow-primary text-white border-0 transition-all hover:-translate-y-0.5"
+              onClick={downloadPdf}
+            >
+              <Download className="mr-2 h-4 w-4" /> Download PDF Report
             </Button>
           </div>
         </div>
@@ -152,12 +179,14 @@ function ResultsPage() {
         {/* Top grid */}
         <div className="mt-8 grid gap-5 lg:grid-cols-3">
           {/* Recovery Index gauge */}
-          <div className="glass rounded-2xl p-6">
+          <div className="glass rounded-2xl p-6 transition-all hover:border-primary/40 hover:-translate-y-0.5">
             <div className="text-xs uppercase tracking-wider text-muted-foreground">Project Recovery Index</div>
             <div className="mt-4 flex items-center gap-6">
               <Gauge value={result.projectRecoveryIndex} />
               <div>
-                <div className={`text-5xl font-bold ${indexColor}`}>{result.projectRecoveryIndex}</div>
+                <div className={`text-5xl font-bold ${indexColor} tabular-nums`}>
+                  <AnimatedNumber value={result.projectRecoveryIndex} />
+                </div>
                 <div className="mt-1 text-sm font-medium">{result.status}</div>
                 {prevIndex != null && (
                   <div className={`mt-2 text-xs ${diff >= 0 ? "text-success" : "text-destructive"}`}>
@@ -169,9 +198,17 @@ function ResultsPage() {
           </div>
 
           {/* Confidence */}
-          <div className="glass rounded-2xl p-6">
+          <div className="glass rounded-2xl p-6 transition-all hover:border-primary/40 hover:-translate-y-0.5">
             <div className="text-xs uppercase tracking-wider text-muted-foreground">Confidence Score</div>
-            <div className="mt-4 text-5xl font-bold gradient-text">{result.confidence}%</div>
+            <div className="mt-4 text-5xl font-bold gradient-text tabular-nums">
+              <AnimatedNumber value={result.confidence} suffix="%" />
+            </div>
+            <div className="mt-4 h-2 w-full overflow-hidden rounded-full bg-muted">
+              <div
+                className="h-full gradient-primary transition-[width] duration-1000 ease-out"
+                style={{ width: `${Math.max(0, Math.min(100, result.confidence))}%` }}
+              />
+            </div>
             <p className="mt-3 text-sm text-muted-foreground">
               {result.confidence >= 60 ? "Sufficient project information available." : "More project data required."}
             </p>
