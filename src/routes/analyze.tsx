@@ -114,11 +114,21 @@ function AnalyzePage() {
       <AppNav />
 
       <main className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold sm:text-4xl">New Project Diagnosis</h1>
-          <p className="mt-2 text-muted-foreground">
-            Give ProjectRx AI as much context as you can. Everything runs on your device and via a secure server call.
-          </p>
+        <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h1 className="text-3xl font-bold sm:text-4xl">New Project Diagnosis</h1>
+            <p className="mt-2 text-muted-foreground">
+              Give ProjectRx AI as much context as you can. Everything runs on your device and via a secure server call.
+            </p>
+          </div>
+          <Button
+            variant="outline"
+            onClick={loadSample}
+            disabled={loading}
+            className="transition-all hover:-translate-y-0.5 hover:border-primary/50 hover:bg-primary/10"
+          >
+            <FileText className="mr-2 h-4 w-4" /> Load Sample Project
+          </Button>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-3">
