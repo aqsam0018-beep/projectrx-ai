@@ -305,7 +305,7 @@ npm run dev
 
 # 🔐 Environment Variables
 
-This project requires an API key for AI functionality.
+This project requires an AI API key for local development.
 
 Store API credentials securely using environment variables provided by your hosting platform.
 
