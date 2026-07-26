@@ -1,4 +1,4 @@
-# 🚀 ProjectRx AI
+<img width="430" height="604" alt="image" src="https://github.com/user-attachments/assets/9c0a13ff-874e-4955-95e0-9ae4ed893eca" /><img width="1892" height="820" alt="image" src="https://github.com/user-attachments/assets/d3a01e4e-1252-416b-b26a-cb0ffc9f8ef1" /># 🚀 ProjectRx AI
 
 > **Diagnose. Simulate. Recover.**
 
@@ -189,55 +189,55 @@ The following screenshots demonstrate the complete ProjectRx AI workflow from pr
 
 ## 2. How It Works
 
-![How It Works](How It Works.png)
+![How It Works][(How It Works.png)](https://github.com/aqsam0018-beep/projectrx-ai/blob/main/How%20it%20Works%20-%20Landing%20Page.png?raw=true)
 
 ---
 
 ## 3. Running Live Demo
 
-![Running Live Demo](Running Live Demo.png)
+![Running Live Demo][(Running Live Demo.png)](https://github.com/aqsam0018-beep/projectrx-ai/blob/main/Running%20Live%20Demo.png?raw=true)
 
 ---
 
 ## 4. Sample Analysis
 
-![Sample Analysis](Sample Analysis.png)
+![Sample Analysis][(Sample Analysis.png)](https://github.com/aqsam0018-beep/projectrx-ai/blob/main/Sampe%20Analysis.png?raw=true)
 
 ---
 
 ## 5. Root Cause Analysis & What-if Simulator
 
-![Root Cause Analysis & What-if Simulator](Root Cause Analysis & What-if Simulator.png)
+![Root Cause Analysis & What-if Simulator][(Root Cause Analysis & What-if Simulator.png)](https://github.com/aqsam0018-beep/projectrx-ai/blob/main/Root%20Cause%20Analysis%20&%20What-If%20Recovery%20Simulator.png?raw=true)
 
 ---
 
 ## 6. Recovery Checklist & Lessons Learned
 
-![Recovery Checklist & Lessons Learned](Recovery Checklist & Lessons Learned.png)
+![Recovery Checklist & Lessons Learned][(Recovery Checklist & Lessons Learned.png)](https://github.com/aqsam0018-beep/projectrx-ai/blob/main/Recovery%20Checklist%20&%20Lessons%20Learned.png?raw=true)
 
 ---
 
 ## 7. Executive Summary & Stakeholder Email
 
-![Executive Summary & Stakeholder Email](Executive Summary & Stakeholder Email.png)
+![Executive Summary & Stakeholder Email][(Executive Summary & Stakeholder Email.png)](https://github.com/aqsam0018-beep/projectrx-ai/blob/main/Executive%20Summary%20&%20Stakeholder%20Email.png?raw=true)
 
 ---
 
 ## 8. Project Diagnosis Form
 
-![Project Diagnosis Form](Project Diagnosis Form.png)
-
+![Project Diagnosis Form][(Project Diagnosis Form.png)
+](https://github.com/aqsam0018-beep/projectrx-ai/blob/main/Project%20Diagnosis%20Form.png?raw=true)
 ---
 
 ## 9. History
 
-![History](History.png)
+![History][(History.png)](https://github.com/aqsam0018-beep/projectrx-ai/blob/main/History.png?raw=true)
 
 ---
 
 ## 10. PDF Report
 
-![PDF Report](PDF Report.png)
+![PDF Report][(PDF Report.png)](https://github.com/aqsam0018-beep/projectrx-ai/blob/main/PDF%20Report.png?raw=true)
 
 ---
 
