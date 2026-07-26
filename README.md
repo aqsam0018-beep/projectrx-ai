@@ -84,7 +84,7 @@ Rather than replacing project managers, ProjectRx AI functions as an **AI Decisi
 
 # 💻 GitHub Repository
 
-[[https://github.com/aqsam0018-beep/projectrx-ai](https://github.com/aqsam0018-beep/projectrx-ai)](https://github.com/aqsam0018-beep/projectrx-ai)
+[[https://github.com/aqsam0018-beep/projectrx-ai](https://github.com/aqsam0018-beep/projectrx-ai)]
 
 
 ---
@@ -352,7 +352,7 @@ Final Project Submission
 
 GitHub Profile:
 
-[https://github.com/aqsam0018-beep](https://github.com/aqsam0018-beep)
+https://github.com/aqsam0018-beep
 
 ---
 
