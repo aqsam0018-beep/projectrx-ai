@@ -1,4 +1,4 @@
-<img width="430" height="604" alt="image" src="https://github.com/user-attachments/assets/9c0a13ff-874e-4955-95e0-9ae4ed893eca" /><img width="1892" height="820" alt="image" src="https://github.com/user-attachments/assets/d3a01e4e-1252-416b-b26a-cb0ffc9f8ef1" /># 🚀 ProjectRx AI
+# 🚀 ProjectRx AI
 
 > **Diagnose. Simulate. Recover.**
 
