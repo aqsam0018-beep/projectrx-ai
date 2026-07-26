@@ -183,7 +183,7 @@ The following screenshots demonstrate the complete ProjectRx AI workflow from pr
 
 ## 1. Landing Page
 
-![Landing Page](Landing Page.png)
+![Landing Page][(Landing Page.png)](https://github.com/aqsam0018-beep/projectrx-ai/blob/main/Landing%20Page.png?raw=true)
 
 ---
 
