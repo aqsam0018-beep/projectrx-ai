@@ -78,13 +78,14 @@ Rather than replacing project managers, ProjectRx AI functions as an **AI Decisi
 
 **ProjectRx AI**
 
-[https://projectrx-ai.lovable.app](https://project-resilience.lovable.app)
+[https://project-resilience.lovable.app](https://project-resilience.lovable.app)
 
 ---
 
 # 💻 GitHub Repository
 
-[https://github.com/aqsam0018-beep/projectrx-ai](https://github.com/aqsam0018-beep/projectrx-ai)
+[[https://github.com/aqsam0018-beep/projectrx-ai](https://github.com/aqsam0018-beep/projectrx-ai)](https://github.com/aqsam0018-beep/projectrx-ai)
+
 
 ---
 
