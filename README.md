@@ -1,110 +1,247 @@
-**ProjectRx AI**
+# 🚀 ProjectRx AI
 
-**Diagnose. Simulate. Recover.**
+> **Diagnose. Simulate. Recover.**
 
-ProjectRx AI is an AI-powered Project Recovery & Decision Support Platform designed to help project managers, startup founders, student leaders, and team coordinators identify project risks before they become critical. By combining AI-powered analysis with interactive visualizations and recovery planning, ProjectRx AI transforms unstructured project updates into actionable insights that support better decision-making.
+### AI-Powered Project Recovery & Decision Support Platform
 
-**Problem Statement**
+ProjectRx AI is an **Explainable AI-powered decision support platform** designed to help project managers identify project risks early, simulate recovery strategies, and generate actionable recommendations before project issues become critical.
 
-Many projects fail because risks are identified too late. Traditional project management tools require time-consuming manual reporting and often provide static information without helping users understand the impact of different recovery strategies.
+Unlike traditional project management tools that focus primarily on task tracking, ProjectRx AI transforms unstructured project information into intelligent, structured insights that support better project recovery decisions.
 
-Project managers frequently deal with scattered information from emails, meeting notes, WhatsApp messages, Slack conversations, and progress reports. Turning this unstructured information into meaningful project insights requires significant effort and experience.
-
-ProjectRx AI addresses this challenge by using Artificial Intelligence to automatically evaluate project health, identify risks, generate recovery recommendations, and simulate recovery scenarios.
-
-**Solution**
-ProjectRx AI allows users to either:
-* Paste unstructured project updates such as meeting notes, emails, or team discussions, or
-* Enter project indicators manually through an intuitive interface.
-
-The AI analyzes the project, calculates an overall Project Recovery Index, identifies potential risks, explains the root causes, and generates actionable recommendations that help project managers make informed decisions.
-
-Rather than replacing human judgment, ProjectRx AI serves as an intelligent decision-support assistant.
-
-**Live Demo**
-
-**Live Application:**
-
-https://project-resilience.lovable.app
-
-**GitHub Repository**
-
-https://github.com/aqsam0018-beep/projectrx-ai
-
-**Features**
-
-* AI-powered project health analysis
-* Project Recovery Index
-* Root Cause Analysis
-* Explainable AI recommendations
-* Risk categorization
-* Confidence score generation
-* Interactive Recovery Checklist
-* Scenario Recovery Simulator
-* Executive Summary generation
-* Stakeholder email generation
-* Responsive dashboard
-* Modern SaaS user interface
-* Mobile-friendly design
-* Real-time analysis experience
-
-**AI Feature**
-
-ProjectRx AI uses Generative AI to analyze project information and generate structured recommendations.
-
-The AI performs tasks such as:
-
-* Understanding project status
-* Identifying hidden project risks
-* Categorizing risks
-* Explaining root causes
-* Recommending recovery actions
-* Generating executive summaries
-* Drafting stakeholder communication
-
-The application is designed as an **AI decision-support tool**, meaning it assists project managers rather than making final decisions.
-
-**AI System Instructions**
-
-The AI is instructed to act as an experienced Project Management Consultant.
-
-Its responsibilities include:
-
-* Evaluating project health
-* Identifying risks
-* Explaining recommendations
-* Providing recovery strategies
-* Returning structured outputs
-* Highlighting assumptions when information is incomplete
-* Encouraging professional judgment instead of replacing it
-
-**Technology Stack**
-
-* React
-* TypeScript
-* TanStack Start
-* Tailwind CSS
-* Vite
-* Lovable (AI-assisted development)
-* Google Gemini AI *(or replace with your actual AI model if different)*
-
-
-# Screenshots
-
-Add at least **5 screenshots** here before submission.
-
-Suggested screenshots:
-
-1. Landing Page
-2. Project Analysis Form
-3. AI Analysis Dashboard
-4. Scenario Recovery Simulator
-5. Recovery Checklist
-6. Executive Summary
+The platform is designed for **Project Managers, Startup Founders, NGOs, Student Teams, Event Managers, and Small Businesses**, enabling them to monitor project health, understand project risks, improve stakeholder communication, and make informed recovery decisions with confidence.
 
 ---
 
-# How to Run the Project
+# 🌍 Problem Statement
+
+Projects often fail because critical issues are discovered too late. Important project information is usually scattered across meeting notes, emails, chat conversations, and informal status updates, making it difficult to understand the true health of a project.
+
+Traditional project management software helps organize work but rarely provides intelligent decision support or practical recovery recommendations.
+
+ProjectRx AI addresses this challenge by combining Explainable AI with project management best practices to transform raw project information into structured analysis, recovery planning, and stakeholder-ready communication.
+
+---
+
+# 💡 Solution
+
+ProjectRx AI provides an intelligent end-to-end project recovery workflow.
+
+Users can either:
+
+- Paste project notes, meeting summaries, or status updates
+- Complete a structured project diagnosis form
+- Load a sample project for demonstration
+
+The AI then analyzes the project and generates:
+
+- Project Recovery Index
+- AI Confidence Score
+- Root Cause Analysis
+- PMBOK-inspired Risk Classification
+- Recovery Recommendations
+- Recovery Checklist
+- Lessons Learned
+- Executive Summary
+- Stakeholder Email
+- Assumptions
+- Missing Information
+
+Users can further evaluate different recovery strategies using the interactive **What-If Recovery Simulator**, allowing them to compare possible project outcomes before making real-world decisions.
+
+Rather than replacing project managers, ProjectRx AI functions as an **AI Decision Support System**, empowering professionals to make faster, better-informed decisions.
+
+---
+
+# 🎯 Target Users
+
+- Project Managers
+- Product Managers
+- Startup Founders
+- NGOs
+- Student Project Teams
+- Event Managers
+- Small Businesses
+
+---
+
+# 🔗 Live Application
+
+**ProjectRx AI**
+
+[https://projectrx-ai.lovable.app](https://project-resilience.lovable.app)
+
+---
+
+# 💻 GitHub Repository
+
+[https://github.com/aqsam0018-beep/projectrx-ai](https://github.com/aqsam0018-beep/projectrx-ai)
+
+---
+
+# ✨ Key Features
+
+- AI-powered Project Diagnosis
+- Explainable AI (XAI)
+- Project Recovery Index (0–100)
+- AI Confidence Score
+- PMBOK-inspired Risk Classification
+- Root Cause Analysis
+- Interactive What-If Recovery Simulator
+- AI-generated Recovery Recommendations
+- Interactive Recovery Checklist
+- Lessons Learned Generator
+- Executive Summary Generator
+- Stakeholder Email Generator
+- Markdown Export (.md)
+- PDF Report Export
+- Analysis History
+- Sample Project Demonstration
+- Dark & Light Theme Support
+- Responsive Dashboard
+- Mobile-Friendly Interface
+
+---
+
+# ⭐ Core Capabilities
+
+### Explainable AI (XAI)
+
+Every recommendation is accompanied by reasoning, helping users understand why the AI suggests a particular recovery strategy.
+
+### Project Recovery Index
+
+Calculates an overall project health score on a 0–100 scale to quickly communicate project status.
+
+### AI Confidence Score
+
+Provides an estimate of the reliability of the generated analysis based on the available project information.
+
+### PMBOK-inspired Risk Classification
+
+Categorizes project risks into commonly recognized project management domains including Schedule, Budget, Quality, Resource, Communication, Stakeholder, and Technical Risks.
+
+### Recovery Simulator
+
+Allows users to evaluate multiple recovery strategies before implementing changes in real projects.
+
+---
+
+# 🤖 AI Integration
+
+ProjectRx AI integrates Artificial Intelligence through the **AI SDK** using the **Lovable AI Gateway (OpenAI-Compatible)**.
+
+The AI engine performs:
+
+- Project Health Analysis
+- Risk Identification
+- Root Cause Analysis
+- Recovery Planning
+- Executive Summary Generation
+- Stakeholder Communication Drafting
+- Lessons Learned Extraction
+- Recovery Checklist Generation
+
+The platform follows an **Explainable AI** approach by presenting not only recommendations but also the reasoning behind them, helping users understand how conclusions are reached.
+
+ProjectRx AI is intended to **support project managers rather than replace professional judgment**.
+
+---
+
+# 🛠 Technology Stack
+
+### Frontend
+
+- React 19
+- TypeScript
+- TanStack Start
+- Tailwind CSS
+- Vite
+
+### AI
+
+- AI SDK
+- Lovable AI Gateway (OpenAI-Compatible)
+
+### Libraries
+
+- Recharts
+- jsPDF
+- React Hook Form
+- Zod
+
+### Development
+
+- Lovable
+- GitHub
+- GitHub Pages / Lovable Deployment
+
+---
+
+# 📸 Screenshots
+
+The following screenshots demonstrate the complete ProjectRx AI workflow from project data input and AI-powered diagnosis to recovery planning, stakeholder communication, project history, and PDF report generation.
+
+## 1. Landing Page
+
+![Landing Page](Landing Page.png)
+
+---
+
+## 2. How It Works
+
+![How It Works](How It Works.png)
+
+---
+
+## 3. Running Live Demo
+
+![Running Live Demo](Running Live Demo.png)
+
+---
+
+## 4. Sample Analysis
+
+![Sample Analysis](Sample Analysis.png)
+
+---
+
+## 5. Root Cause Analysis & What-if Simulator
+
+![Root Cause Analysis & What-if Simulator](Root Cause Analysis & What-if Simulator.png)
+
+---
+
+## 6. Recovery Checklist & Lessons Learned
+
+![Recovery Checklist & Lessons Learned](Recovery Checklist & Lessons Learned.png)
+
+---
+
+## 7. Executive Summary & Stakeholder Email
+
+![Executive Summary & Stakeholder Email](Executive Summary & Stakeholder Email.png)
+
+---
+
+## 8. Project Diagnosis Form
+
+![Project Diagnosis Form](Project Diagnosis Form.png)
+
+---
+
+## 9. History
+
+![History](History.png)
+
+---
+
+## 10. PDF Report
+
+![PDF Report](PDF Report.png)
+
+---
+
+# ⚙️ How to Run the Project
 
 Clone the repository:
 
@@ -112,13 +249,19 @@ Clone the repository:
 git clone https://github.com/aqsam0018-beep/projectrx-ai.git
 ```
 
-Install dependencies:
+Navigate to the project directory:
+
+```bash
+cd projectrx-ai
+```
+
+Install project dependencies:
 
 ```bash
 npm install
 ```
 
-Start the development server:
+Run the development server:
 
 ```bash
 npm run dev
@@ -126,43 +269,65 @@ npm run dev
 
 ---
 
-# Environment Variables
+# 🔐 Environment Variables
 
-Create a `.env` file and add your AI API key.
+This project requires an API key for AI functionality.
+
+Store API credentials securely using environment variables provided by your hosting platform.
 
 Example:
 
 ```env
-GEMINI_API_KEY=YOUR_API_KEY
+LOVABLE_API_KEY=YOUR_API_KEY
 ```
 
-Never commit API keys to GitHub.
+**⚠️ Never commit API keys or other secrets to the repository. Keep them securely stored as environment variables.**
 
 ---
 
-# Future Improvements
+# 🚀 Future Enhancements
 
-* Multi-user collaboration
-* User authentication
-* Cloud project history
-* PDF report export
-* Calendar integration
-* Jira and Trello integrations
-* Risk trend analytics
-* Team performance insights
-* AI-powered predictive forecasting
+- User Authentication
+- Team Collaboration
+- Cloud Project Storage
+- Jira Integration
+- Trello Integration
+- Calendar Integration
+- Predictive Project Forecasting
+- Advanced Analytics Dashboard
+- Multi-language Support
 
 ---
 
-# Project Impact
+# 📈 Expected Impact
 
-ProjectRx AI demonstrates how Artificial Intelligence can support project managers by simplifying project diagnostics, improving transparency, and enabling proactive recovery planning.
+ProjectRx AI demonstrates how Explainable AI can enhance project management by converting fragmented project information into structured, actionable intelligence.
 
-Instead of manually interpreting scattered project information, users receive structured insights that help them identify risks earlier and make more informed management decisions.
+The platform enables project teams to identify risks earlier, evaluate recovery strategies before implementation, improve stakeholder communication, and make more informed decisions throughout the project lifecycle.
 
+By combining AI-assisted analysis with established project management principles, ProjectRx AI helps improve transparency, decision quality, and overall project resilience.
 
-# Author
+---
 
-**Aqsa Tariq**
+# 👩‍💻 Author
 
-Final Project — ACT AI National AI Training Programme (2026)
+**Aqsa Malik**
+
+Final Project Submission  
+**ACT AI National AI Training Program (2026)**
+
+GitHub Profile:
+
+[https://github.com/aqsam0018-beep](https://github.com/aqsam0018-beep)
+
+---
+
+## 📄 License
+
+This project was developed for educational and demonstration purposes as part of the **ACT AI National AI Training Program Final Project**.
+
+---
+
+**ProjectRx AI — Diagnose. Simulate. Recover.**
+
+*Built with TanStack Start + Lovable AI · © 2026*
