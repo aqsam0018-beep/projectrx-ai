@@ -64,6 +64,16 @@ Rather than replacing project managers, ProjectRx AI functions as an **AI Decisi
 
 ---
 
+## 🎯 Project Objectives
+
+• Detect project risks early using AI.
+• Improve project recovery planning.
+• Support data-driven decision making.
+• Enhance stakeholder communication.
+• Reduce project failure risk.
+
+---
+
 # 🔗 Live Application
 
 **ProjectRx AI**
@@ -193,7 +203,10 @@ Its responsibilities include:
 
 - Lovable
 - GitHub
-- GitHub Pages / Lovable Deployment
+
+### Deployment
+
+- Lovable Hosted Application
 
 ---
 
